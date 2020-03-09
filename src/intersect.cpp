@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <vector>
 #include <utility>
+#include <set>
 #include<algorithm>
 using namespace std;
 class Line
@@ -127,7 +128,7 @@ int main()
 	cin >> n;
 	vector<Line> Array_line;
 	vector<Cycle> Array_cycle;
-	vector<pair<double, double>> Array_dot;
+	set<pair<double, double>> Array_dot;
 	for (int i = 0; i < n; i++) {
 		cin >> type;
 		if (type == 'L') {
@@ -138,15 +139,15 @@ int main()
 			{
 				if (Array_line.at(j).isteresect(l))
 				{
-					Array_dot.push_back(Array_line.at(j).intersect(l));
+					Array_dot.insert(Array_line.at(j).intersect(l));
 				}
 			}
 			for (unsigned int j = 0; j < Array_cycle.size(); j++) {
 				if (Array_cycle.at(j).line_cycle_pos(l))
 				{
 					pair<pair<double, double>, pair<double, double>> dot = Array_cycle.at(j).line_cycle_instere(l);
-					Array_dot.push_back(dot.first);
-					Array_dot.push_back(dot.second);
+					Array_dot.insert(dot.first);
+					Array_dot.insert(dot.second);
 				}
 			}
 		}
@@ -160,8 +161,8 @@ int main()
 				if (c.line_cycle_pos(Array_line.at(j)))
 				{
 					pair<pair<double, double>, pair<double, double>> dot = c.line_cycle_instere(Array_line.at(j));
-					Array_dot.push_back(dot.first);
-					Array_dot.push_back(dot.second);
+					Array_dot.insert(dot.first);
+					Array_dot.insert(dot.second);
 				}
 			}
 			for (unsigned int j = 0; j < Array_cycle.size() - 1; j++)
@@ -169,14 +170,12 @@ int main()
 				if (c.cycle_cycel_pos(Array_cycle.at(j)))
 				{
 					pair<pair<double, double>, pair<double, double>> dot = c.cycle_cycle_instere(Array_cycle.at(j));
-					Array_dot.push_back(dot.first);
-					Array_dot.push_back(dot.second);
+					Array_dot.insert(dot.first);
+					Array_dot.insert(dot.second);
 				}
 			}
 		}
 	}
-	sort(Array_dot.begin(), Array_dot.end());
-	Array_dot.erase(unique(Array_dot.begin(), Array_dot.end()), Array_dot.end());
 	cout << Array_dot.size() << endl;
 	
 }
