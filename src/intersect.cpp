@@ -2,7 +2,8 @@
 #include <vector>
 #include <utility>
 #include <set>
-#include<algorithm>
+#include <fstream>
+#include<string.h>
 using namespace std;
 class Line
 {
@@ -27,7 +28,8 @@ public:
 		pair<double, double> dot(x, y);
 		return dot;
 	}
-	bool isteresect(Line l) {
+	bool isteresect(Line l) 
+	{
 		if (A * l.B - B * l.A == 0)
 		{
 			return false;
@@ -119,20 +121,34 @@ public:
 		return line_cycle_instere(temp_l);
 	}
 };
-int main()
-{
+int main(int argc,char*argv[])
+{	
+	ifstream in;
+	ofstream out;
+	for (int i = 0; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-i") == 0)
+		{
+			in = ifstream(argv[i+1]);
+		}
+		if (strcmp(argv[i], "-o") == 0)
+		{
+			out = ofstream(argv[i+1]);
+		}
+		
+	}
 	char type;
 	double x1, x2, y1, y2;
 	double a, b, r;
 	int n;
-	cin >> n;
+	in >> n;
 	vector<Line> Array_line;
 	vector<Cycle> Array_cycle;
 	set<pair<double, double>> Array_dot;
 	for (int i = 0; i < n; i++) {
-		cin >> type;
+		in >> type;
 		if (type == 'L') {
-			cin >> x1 >> y1 >> x2 >> y2;
+			in >> x1 >> y1 >> x2 >> y2;
 			Line l = Line(x1, y1, x2, y2);
 			Array_line.push_back(l);
 			for (unsigned int j = 0; j < Array_line.size()-1; j++)
@@ -153,7 +169,7 @@ int main()
 		}
 		if (type == 'C')
 		{
-			cin >> a >> b >> r;
+			in >> a >> b >> r;
 			Cycle c = Cycle(a, b, r);
 			Array_cycle.push_back(c);
 			for (unsigned int j = 0; j < Array_line.size(); j++)
@@ -176,7 +192,7 @@ int main()
 			}
 		}
 	}
-	cout << Array_dot.size() << endl;
+	out << Array_dot.size() << endl;
 	
 }
 
