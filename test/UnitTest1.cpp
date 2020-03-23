@@ -126,5 +126,78 @@ namespace UnitTest1
 			Assert::AreEqual(0, (int)dot1.first.second);
 			Assert::AreEqual(1, (int)dot1.second);
 		}
+		
+		TEST_METHOD(TestOperationException) {
+			auto func = [] {test("input1.txt"); };
+			Assert::ExpectException<OperatorException>(func);
+			/*try {
+				test("input1.txt");
+			}
+			catch (OperatorException& e) {
+				Assert::AreEqual("Operation Exception", e.what());
+			}*/
+		}
+		TEST_METHOD(TestEndException) {
+			auto func = [] {test("input2.txt"); };
+			Assert::ExpectException<EndException>(func);
+			/*try {
+				test("input2.txt");
+			}
+			catch (EndException& e) {
+				Assert::AreEqual("End Exception", e.what());
+			}*/
+		}
+		TEST_METHOD(TestDefectException) {
+			auto func = [] {test("input3.txt"); };
+			Assert::ExpectException<DefectException>(func);
+			/*try {
+				test("input3.txt");
+			}
+			catch (DefectException& e) {
+				Assert::AreEqual("Defect Exception", e.what());
+			}*/
+		}
+		TEST_METHOD(TestNumberException) {
+			auto func = [] {test("input4.txt"); };
+			Assert::ExpectException<NumberException>(func);
+			/*try {
+				test("input4.txt");
+			}
+			catch (NumberException& e) {
+				Assert::AreEqual("Number Exception", e.what());
+			}*/
+		}
+		TEST_METHOD(TestEdgeException) {
+			auto func = [] {test("input5.txt"); };
+			Assert::ExpectException<EdgeException>(func);
+			/*try {
+				test("input5.txt");
+			}
+			catch (EdgeException& e) {
+				Assert::AreEqual("Edge Exception", e.what());
+			}*/
+		}
+		TEST_METHOD(TestLinesameException) {
+			auto func = [] {test("input6.txt"); };
+			Assert::ExpectException<LinesameException>(func);
+			/*try {
+				test("input6.txt");
+			}
+			catch (LinesameException& e) {
+				Assert::AreEqual("Linesame Exception", e.what());
+			}*/
+		}
+		TEST_METHOD(TestCirclesameException) {
+			auto func = [] {test("input7.txt"); };
+			Assert::ExpectException<CirclesameException>(func);
+			/*try {
+				test("input7.txt");
+			}
+			catch (CirclesameException& e) {
+				Assert::AreEqual("Circlesame Exception", e.what());
+			}*/
+		}
+		
 	};
+	
 }
