@@ -1388,9 +1388,11 @@ set<pair<double, double>> input_ray(pair<pair<double, double>, pair<double, doub
 			}
 		}
 		else {
-			pair<double, double> temp1 = samepoint.at(0);
-			Array_dot.insert(temp1);
-			samepoint.clear();
+			if(!samepoint.empty()){
+				pair<double, double> temp1 = samepoint.at(0);
+				Array_dot.insert(temp1);
+				samepoint.clear();
+			}
 		}
 	}
 	for (unsigned int j = 0; j < Array_segment.size(); j++)
