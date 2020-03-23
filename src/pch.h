@@ -16,7 +16,7 @@
 #else
 #define IMPORT_DLL _declspec(dllimport) 
 #endif
-IMPORT_DLL std::set<std::pair<double, double>> solve(std::vector<std::pair<char, std::pair<std::pair<int, int>, std::pair<int, int>>>> line, std::vector<std::pair<char, std::pair<std::pair<int, int>, int>>> circle);
+IMPORT_DLL std::set<std::pair<double,double>> solve(std::vector<std::pair<char, std::pair<std::pair<int, int>, std::pair<int, int>>>> line, std::vector<std::pair<char, std::pair<std::pair<int, int>, int>>> circle);
 IMPORT_DLL bool if_line_same(std::pair<std::pair<double, double>, std::pair<double, double>> a, std::pair<std::pair<double, double>, std::pair<double, double>> b);
 IMPORT_DLL bool if_circle_same(std::pair<std::pair<double, double>, double> c1, std::pair<std::pair<double, double>, double> c2);
 IMPORT_DLL std::set<std::pair<double, double>> input_line(std::pair<std::pair<double, double>, std::pair<double, double>> line1);

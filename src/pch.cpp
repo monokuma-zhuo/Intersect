@@ -142,10 +142,10 @@ double getnum(ifstream& in) {
 	while (isdigit(temp)) {
 		token = token + temp;
 		temp = in.get();
-		//cout << temp << endl;
 		if (temp == '\n') {
 			hangshu++;
 		}
+		//cout << temp << endl;
 		if (!isspace(temp) && !isdigit(temp) && !in.eof()) {
 			//cout << 1111111111 << endl;
 			throw NumberException();
@@ -980,9 +980,12 @@ set<pair<double, double>> solve(vector<pair<char, pair<pair<int, int>, pair<int,
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
+					
 				}
 			}
 			for (unsigned int j = 0; j < Array_segment.size(); j++)
@@ -1017,9 +1020,11 @@ set<pair<double, double>> solve(vector<pair<char, pair<pair<int, int>, pair<int,
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
 				}
 			}
 			for (unsigned int j = 0; j < Array_cycle.size(); j++) {
@@ -1094,9 +1099,11 @@ set<pair<double, double>> solve(vector<pair<char, pair<pair<int, int>, pair<int,
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
 				}
 			}
 
@@ -1132,9 +1139,11 @@ set<pair<double, double>> solve(vector<pair<char, pair<pair<int, int>, pair<int,
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
 				}
 			}
 
@@ -1388,7 +1397,7 @@ set<pair<double, double>> input_ray(pair<pair<double, double>, pair<double, doub
 			}
 		}
 		else {
-			if(!samepoint.empty()){
+			if (!samepoint.empty()) {
 				pair<double, double> temp1 = samepoint.at(0);
 				Array_dot.insert(temp1);
 				samepoint.clear();
@@ -1427,9 +1436,11 @@ set<pair<double, double>> input_ray(pair<pair<double, double>, pair<double, doub
 			}
 		}
 		else {
-			pair<double, double> temp1 = samepoint.at(0);
-			Array_dot.insert(temp1);
-			samepoint.clear();
+			if (!samepoint.empty()) {
+				pair<double, double> temp1 = samepoint.at(0);
+				Array_dot.insert(temp1);
+				samepoint.clear();
+			}
 		}
 	}
 	for (unsigned int j = 0; j < Array_cycle.size(); j++) {
@@ -1500,9 +1511,11 @@ set<pair<double, double>> input_segment(pair<pair<double, double>, pair<double, 
 			}
 		}
 		else {
-			pair<double, double> temp1 = samepoint.at(0);
-			Array_dot.insert(temp1);
-			samepoint.clear();
+			if (!samepoint.empty()) {
+				pair<double, double> temp1 = samepoint.at(0);
+				Array_dot.insert(temp1);
+				samepoint.clear();
+			}
 		}
 	}
 
@@ -1538,9 +1551,11 @@ set<pair<double, double>> input_segment(pair<pair<double, double>, pair<double, 
 			}
 		}
 		else {
-			pair<double, double> temp1 = samepoint.at(0);
-			Array_dot.insert(temp1);
-			samepoint.clear();
+			if (!samepoint.empty()) {
+				pair<double, double> temp1 = samepoint.at(0);
+				Array_dot.insert(temp1);
+				samepoint.clear();
+			}
 		}
 	}
 
@@ -1615,11 +1630,10 @@ set<pair<double, double>> input_circle(pair<pair<double, double>, double> circle
 }
 long main1(int argc, char* argv[])
 {
-	ifstream in;
-	ofstream out;
 	try
 	{
-		
+		ifstream in;
+		ofstream out;
 		for (int i = 0; i < argc; i++)
 		{
 			if (strcmp(argv[i], "-i") == 0)
@@ -1752,9 +1766,11 @@ long main1(int argc, char* argv[])
 						}
 					}
 					else {
-						pair<double, double> temp1 = samepoint.at(0);
-						Array_dot.insert(temp1);
-						samepoint.clear();
+						if (!samepoint.empty()) {
+							pair<double, double> temp1 = samepoint.at(0);
+							Array_dot.insert(temp1);
+							samepoint.clear();
+						}
 					}
 				}
 				for (unsigned int j = 0; j < Array_segment.size(); j++)
@@ -1789,9 +1805,11 @@ long main1(int argc, char* argv[])
 						}
 					}
 					else {
-						pair<double, double> temp1 = samepoint.at(0);
-						Array_dot.insert(temp1);
-						samepoint.clear();
+						if (!samepoint.empty()) {
+							pair<double, double> temp1 = samepoint.at(0);
+							Array_dot.insert(temp1);
+							samepoint.clear();
+						}
 					}
 				}
 				for (unsigned int j = 0; j < Array_cycle.size(); j++) {
@@ -1862,9 +1880,11 @@ long main1(int argc, char* argv[])
 						}
 					}
 					else {
-						pair<double, double> temp1 = samepoint.at(0);
-						Array_dot.insert(temp1);
-						samepoint.clear();
+						if (!samepoint.empty()) {
+							pair<double, double> temp1 = samepoint.at(0);
+							Array_dot.insert(temp1);
+							samepoint.clear();
+						}
 					}
 				}
 
@@ -1900,9 +1920,11 @@ long main1(int argc, char* argv[])
 						}
 					}
 					else {
-						pair<double, double> temp1 = samepoint.at(0);
-						Array_dot.insert(temp1);
-						samepoint.clear();
+						if (!samepoint.empty()) {
+							pair<double, double> temp1 = samepoint.at(0);
+							Array_dot.insert(temp1);
+							samepoint.clear();
+						}
 					}
 				}
 
@@ -1980,36 +2002,45 @@ long main1(int argc, char* argv[])
 				throw OperatorException();
 			}
 		}
+
+		char tempchar;
+		tempchar = in.get();
+		while (isspace(tempchar)) {
+			if (tempchar == '\n') {
+				hangshu++;
+			}
+			tempchar = in.get();;
+		}
 		if (!in.eof()) {
 			throw EndException();
 		}
-		out << Array_dot.size() << endl;
+		out << Array_dot.size();
 		return (long)Array_dot.size();
 	}
 	catch (OperatorException& e)
 	{
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 	catch (NumberException& e) {
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 	catch (EndException& e) {
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 	catch (DefectException& e) {
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 	catch (LinesameException& e) {
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 	catch (CirclesameException& e) {
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 	catch (LineillegalException& e) {
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 	catch (CircleillegalException& e) {
-		out << e.what() << "at " << hangshu << endl;
+		cout << e.what() << "at " << hangshu << endl;
 	}
 
 }
@@ -2150,9 +2181,11 @@ void test(string str1) {
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
 				}
 			}
 			for (unsigned int j = 0; j < Array_segment.size(); j++)
@@ -2187,9 +2220,11 @@ void test(string str1) {
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
 				}
 			}
 			for (unsigned int j = 0; j < Array_cycle.size(); j++) {
@@ -2260,9 +2295,11 @@ void test(string str1) {
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
 				}
 			}
 
@@ -2298,9 +2335,11 @@ void test(string str1) {
 					}
 				}
 				else {
-					pair<double, double> temp1 = samepoint.at(0);
-					Array_dot.insert(temp1);
-					samepoint.clear();
+					if (!samepoint.empty()) {
+						pair<double, double> temp1 = samepoint.at(0);
+						Array_dot.insert(temp1);
+						samepoint.clear();
+					}
 				}
 			}
 
