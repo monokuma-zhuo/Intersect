@@ -5,13 +5,14 @@
 #include <QPaintEvent>
 #include <QtGui>
 #include "dialog.h"
-#include "dialog2.h"
 #include <QMap>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QList>
 #include<set>
 #include<QLabel>
+#include <vector>
+#include <core.h>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -29,11 +30,12 @@ public:
     void Paint_Segment(double x1,double y1,double x2,double y2);
     void Paint_Cycle(double x,double y,double r);
     std::set<std::pair<double, double>> intersect_point;
+    std::vector<Line> lines;
+    std::vector<Circle> circles;
 private:
     Ui::MainWindow *ui;
     QImage image;
     Dialog *dialog1;
-    Dialog2 *dialog2;
 
 protected:
     void paintEvent(QPaintEvent *){

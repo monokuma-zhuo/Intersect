@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#define EPS (1e-12)
+#define equal(a,b) (fabs((a) - (b)) < EPS)
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -88,7 +89,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_4_clicked()
 {
-    std::set<std::pair<double, double>>::iterator it;
+    /*std::set<std::pair<double, double>>::iterator it;
     for(it=intersect_point.begin();it!=intersect_point.end();it++)
     {
         QString x=QString::number((*it).first,'f',1);
@@ -97,5 +98,48 @@ void MainWindow::on_pushButton_4_clicked()
         text->setText("("+x+","+y+")");
         text->setGeometry(300+(*it).first,300-(*it).second,100,25);
         text->show();
-    }
+    }*/
+    set<pair<double,double>,cmp> intersections;
+    Solve solve;
+    for (unsigned int i = 0; i < lines.size(); i++)
+     {
+      for (unsigned int j = i + 1; j < lines.size(); j++)
+      {
+       if (lines[i].type == 'L' && lines[j].type == 'L')  solve.LLintersect(&intersections, lines[i], lines[j]);
+       else if (lines[i].type == 'R' && lines[j].type == 'R') solve.RRintersect(&intersections, lines[i], lines[j]);
+       else if (lines[i].type == 'S' && lines[j].type == 'S') solve.SSintersect(&intersections, lines[i], lines[j]);
+       else if (lines[i].type == 'R' && lines[j].type == 'L') solve.LRintersect(&intersections, lines[j], lines[i]);
+       else if (lines[i].type == 'L' && lines[j].type == 'R') solve.LRintersect(&intersections, lines[i], lines[j]);
+       else if (lines[i].type == 'L' && lines[j].type == 'S') solve.LSintersect(&intersections, lines[i], lines[j]);
+       else if (lines[i].type == 'S' && lines[j].type == 'L') solve.LSintersect(&intersections, lines[j], lines[i]);
+       else if (lines[i].type == 'S' && lines[j].type == 'R') solve.SRintersect(&intersections, lines[i], lines[j]);
+       else if (lines[i].type == 'R' && lines[j].type == 'S') solve.SRintersect(&intersections, lines[j], lines[i]);
+      }
+     }
+
+     for (unsigned int i = 0; i < lines.size(); i++)
+     {
+      for (unsigned int j = 0; j < circles.size(); j++)
+      {
+       if (lines[i].type == 'L') solve.LCintersect(&intersections, lines[i], circles[j]);
+       else if (lines[i].type == 'R') solve.RCintersect(&intersections, lines[i], circles[j]);
+       else if (lines[i].type == 'S') solve.SCintersect(&intersections, lines[i], circles[j]);
+      }
+     }
+
+     for (unsigned int i = 0; i < circles.size(); i++)
+     {
+      for (unsigned int j = i + 1; j < circles.size(); j++) solve.CCintersect(&intersections, circles[i], circles[j]);
+     }
+     std::set<std::pair<double, double>>::iterator it;
+     for(it=intersections.begin();it!=intersections.end();it++)
+     {
+         QString x=QString::number((*it).first,'f',1);
+         QString y=QString::number((*it).second,'f',1);
+         QLabel *text=new QLabel(this);
+         text->setText("("+x+","+y+")");
+         text->setGeometry(300+(*it).first,300-(*it).second,100,25);
+         text->show();
+     }
+
 }

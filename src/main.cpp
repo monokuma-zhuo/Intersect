@@ -4,7 +4,6 @@
 #include <QApplication>
 #include <QDialog>
 #include <QLibrary>
-#include <pch.h>
 static int pointx0=300,pointy0=300;//原点坐标
 LONG ApplicationCrashHandler(EXCEPTION_POINTERS *pException){//程式异常捕获
     QMessageBox::critical(NULL,"Error","intersectException");
@@ -22,7 +21,10 @@ void MainWindow::Paint()
 }
 void MainWindow::Paint_Line(double x1,double y1,double x2,double y2)
 {
-    intersect_point=input_line(std::make_pair(std::make_pair(x1,y1),std::make_pair(x2,y2)));
+
+    //intersect_point=input_line(std::make_pair(std::make_pair(x1,y1),std::make_pair(x2,y2)));
+    Line l(x1,y1,x2,y2,'L');
+    lines.push_back(l);
     QPainter painter(&image);
     QPen pen;
     pen.setColor(Qt::blue);
@@ -44,7 +46,9 @@ void MainWindow::Paint_Line(double x1,double y1,double x2,double y2)
 }
 void MainWindow::Paint_Ray(double x1, double y1, double x2, double y2)
 {
-    intersect_point=input_ray(std::make_pair(std::make_pair(x1,y1),std::make_pair(x2,y2)));
+    //intersect_point=input_ray(std::make_pair(std::make_pair(x1,y1),std::make_pair(x2,y2)));
+    Line l(x1,y1,x2,y2,'R');
+    lines.push_back(l);
     QPainter painter(&image);
     QPen pen;
     pen.setColor(Qt::blue);
@@ -86,7 +90,9 @@ void MainWindow::Paint_Ray(double x1, double y1, double x2, double y2)
 }
 void MainWindow::Paint_Segment(double x1, double y1, double x2, double y2)
 {
-    intersect_point=input_segment(std::make_pair(std::make_pair(x1,y1),std::make_pair(x2,y2)));
+    //intersect_point=input_segment(std::make_pair(std::make_pair(x1,y1),std::make_pair(x2,y2)));
+    Line l(x1,y1,x2,y2,'S');
+    lines.push_back(l);
     QPainter painter(&image);
     QPen pen;
     pen.setColor(Qt::blue);
@@ -96,7 +102,9 @@ void MainWindow::Paint_Segment(double x1, double y1, double x2, double y2)
 }
 void MainWindow::Paint_Cycle(double x, double y, double r)
 {
-    intersect_point=input_circle(std::make_pair(std::make_pair(x,y),r));
+    //intersect_point=input_circle(std::make_pair(std::make_pair(x,y),r));
+    Circle c(x,y,r);
+    circles.push_back(c);
     QMessageBox::information(NULL,"ErrorMessage","intersectException");
     QPainter painter(&image);
     QPen pen;
@@ -111,6 +119,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)ApplicationCrashHandler);
-    main1(argc,argv);
     return a.exec();
 }
